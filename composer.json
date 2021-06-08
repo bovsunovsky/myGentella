@@ -30,6 +30,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "symfony/maker-bundle": "^1.19",
         "symfony/profiler-pack": "^1.0"
     },
@@ -62,15 +63,16 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "cs-check": "php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
+        "cs-fix": "php-cs-fixer fix --allow-risky=yes --diff --ansi"
     },
     "conflict": {
         "symfony/symfony": "*"

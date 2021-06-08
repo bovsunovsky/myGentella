@@ -27,7 +27,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $passwordEncoder;
     private $login_route;
 
-    public function __construct(UserRepository $userRepository,RouterInterface $router,UserPasswordEncoderInterface $passwordEncoder,CsrfTokenManagerInterface $csrfTokenManager)
+    public function __construct(UserRepository $userRepository, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder, CsrfTokenManagerInterface $csrfTokenManager)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
@@ -35,58 +35,55 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->passwordEncoder = $passwordEncoder;
     }
 
-
-
     public function supports(Request $request)
     {
         $this->login_route = $request->attributes->get('_route');
-        return  ($request->attributes->get('_route')==='app_login')
+
+        return ('app_login' === $request->attributes->get('_route'))
             && $request->isMethod('POST');
     }
-
 
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'username'=>$request->request->get('username'),
-            'password'=>$request->request->get('password'),
-            'csrf_token'=>$request->request->get('_csrf_token'),
+            'username' => $request->request->get('username'),
+            'password' => $request->request->get('password'),
+            'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials["username"]
+            $credentials['username']
         );
+
         return $credentials;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate',$credentials["csrf_token"]);
-        if (!$this->csrfTokenManager->isTokenValid($token)){
+        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+        if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
 
-        return $this->userRepository->findOneByUsernameOrEmail($credentials["username"]);
+        return $this->userRepository->findOneByUsernameOrEmail($credentials['username']);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user,$credentials["password"])  ;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
-
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-
-        if ($targetPath = $this->getTargetPath($request->getSession(),$providerKey)){
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        return new RedirectResponse($this->router->generate("app_admin_index"));
+
+        return new RedirectResponse($this->router->generate('app_admin_index'));
     }
 
     protected function getLoginUrl()
     {
-        return $this->router->generate("app_login");
+        return $this->router->generate('app_login');
     }
-
 }

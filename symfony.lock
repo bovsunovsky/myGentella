@@ -2,6 +2,12 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "composer/semver": {
+        "version": "3.2.5"
+    },
+    "composer/xdebug-handler": {
+        "version": "2.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -28,6 +34,9 @@
     },
     "doctrine/dbal": {
         "version": "2.10.2"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
         "version": "2.0",
@@ -99,6 +108,21 @@
     "egulias/email-validator": {
         "version": "2.1.19"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "be2103eb4a20942e28a6dd87736669b757132435"
+        },
+        "files": [
+            ".php-cs-fixer.dist.php"
+        ]
+    },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
@@ -147,6 +171,9 @@
     },
     "php": {
         "version": "7.4"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v2.0.2"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -457,9 +484,6 @@
     "symfony/string": {
         "version": "v5.1.0"
     },
-    "symfony/templating": {
-        "version": "v5.1.1"
-    },
     "symfony/translation": {
         "version": "3.3",
         "recipe": {
@@ -549,8 +573,5 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
     }
 }

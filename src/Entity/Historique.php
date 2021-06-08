@@ -24,7 +24,6 @@ class Historique
      */
     private $user;
 
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -55,7 +54,6 @@ class Historique
         return $this->id;
     }
 
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -67,7 +65,6 @@ class Historique
 
         return $this;
     }
-
 
     public function getAction(): ?string
     {
@@ -116,5 +113,4 @@ class Historique
 
         return $this;
     }
-
 }

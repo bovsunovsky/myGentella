@@ -85,7 +85,6 @@ class User implements UserInterface, EquatableInterface
      */
     private $historiques;
 
-
     public function __construct()
     {
         $this->blogPosts = new ArrayCollection();
@@ -164,7 +163,7 @@ class User implements UserInterface, EquatableInterface
         return $this->nomComplet;
     }
 
-    public function setNomComplet( $nomComplet): self
+    public function setNomComplet($nomComplet): self
     {
         $this->nomComplet = $nomComplet;
 
@@ -176,7 +175,7 @@ class User implements UserInterface, EquatableInterface
         return $this->email;
     }
 
-    public function setEmail( $email): self
+    public function setEmail($email): self
     {
         $this->email = $email;
 
@@ -214,21 +213,22 @@ class User implements UserInterface, EquatableInterface
         return $this;
     }
 
-    public function getAvatarUrl($size){
+    public function getAvatarUrl($size)
+    {
         return "https://api.adorable.io/avatars/$size/".$this->username;
     }
 
-
-    function getColorCode() {
+    public function getColorCode()
+    {
         $code = dechex(crc32($this->getUsername()));
         $code = substr($code, 0, 6);
-        return "#".$code;
+
+        return '#'.$code;
     }
 
     /**
      * @Assert\Callback
      */
-
     public function validate(ExecutionContextInterface $context, $payload)
     {
         /*if (strlen($this->password)< 3){
@@ -348,11 +348,11 @@ class User implements UserInterface, EquatableInterface
         return $this;
     }
 
-
     public function isEqualTo(UserInterface $user)
     {
-        if ($user instanceof User)
-        return $this->isValid() && !$this->isDeleted() && $this->getPassword() == $user->getPassword() && $this->getUsername() == $user->getUsername()
-            && $this->getEmail() == $user->getEmail() ;
+        if ($user instanceof User) {
+            return $this->isValid() && !$this->isDeleted() && $this->getPassword() == $user->getPassword() && $this->getUsername() == $user->getUsername()
+            && $this->getEmail() == $user->getEmail();
+        }
     }
 }

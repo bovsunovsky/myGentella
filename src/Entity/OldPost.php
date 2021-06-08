@@ -96,12 +96,10 @@ class OldPost
     /**
      * @param Categorie[] $categories
      */
-    public function setCategories( $categories): void
+    public function setCategories($categories): void
     {
         $this->categories = $categories;
     }
-
-
 
     public function removeCategory(Categorie $category): self
     {

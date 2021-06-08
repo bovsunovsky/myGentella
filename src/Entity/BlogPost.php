@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BlogPostRepository::class)
@@ -229,7 +228,7 @@ class BlogPost
     /**
      * @param Categorie[] $categories
      */
-    public function setCategories( $categories): void
+    public function setCategories($categories): void
     {
         $this->categories = $categories;
     }
@@ -252,8 +251,9 @@ class BlogPost
         return $this;
     }
 
-    public function isPublished():bool {
-        return $this->getValid() && $this->plubishedAt < new \DateTime() && $this->plubishedAt != null ;
+    public function isPublished(): bool
+    {
+        return $this->getValid() && $this->plubishedAt < new \DateTime() && null != $this->plubishedAt;
     }
 
     /**
@@ -287,7 +287,8 @@ class BlogPost
         return $this;
     }
 
-    public function oldify(){
-        $this->titre .= "-old-".$this->id;
+    public function oldify()
+    {
+        $this->titre .= '-old-'.$this->id;
     }
 }
