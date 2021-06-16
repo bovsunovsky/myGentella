@@ -41,7 +41,11 @@ RUN docker-php-ext-configure intl && \
 		soap \
 		tidy \
 		xsl \
-		&& docker-php-ext-enable gd
+		&& docker-php-ext-enable gd \
+		&& pecl install xdebug \
+        && docker-php-ext-enable xdebug
+
+COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
 
 RUN curl -sS https://getcomposer.org/installer | php -- \
 --install-dir=/usr/bin --filename=composer

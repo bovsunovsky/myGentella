@@ -8,6 +8,12 @@ services:
     volumes:
       - ./:/var/www/app
     working_dir: /var/www/app
+    environment:
+      PHP_IDE_CONFIG: "serverName=xdebug-app"
+      XDEBUG_CONFIG: "discover_client_host = 1"
+    networks:
+      default:
+        ipv4_address: 10.10.1.53
   nginx:
     image: nginx:latest
     container_name: gentela_nginx
@@ -18,6 +24,9 @@ services:
       - 8080:80
     depends_on:
       - php-fpm
+    networks:
+      default:
+        ipv4_address: 10.10.1.54
 networks:
   default:
     external:
